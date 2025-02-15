@@ -1,0 +1,12 @@
+.element__content {
+  display: flex;
+}
+
+.element__like {
+  background-image: url(../images/heart-button.svg);
+  background-size: cover;
+  background-color: #fff;
+  width: 21px;
+  height: 19px;
+  border-style: none;
+}
