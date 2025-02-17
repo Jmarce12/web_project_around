@@ -1,12 +1,52 @@
-.element__content {
+.element {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+}
+
+.element__photo {
+  width: 100%;
+  height: 282px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.element__photo_rotation {
+  transform: rotateY(180deg);
+}
+
+.element__content {
+  box-sizing: border-box;
+  width: 282px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 0 0 10px 10px;
+  padding: 25px 15px 25px 21px;
+  object-fit: contain;
+}
+
+.element__title {
+  margin: 0;
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 226px;
 }
 
 .element__like {
-  background-image: url(../images/heart-button.svg);
-  background-size: cover;
-  background-color: #fff;
   width: 21px;
   height: 19px;
+  background-image: url(../images/heart-button.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #fff;
   border-style: none;
+  padding: 0;
 }
