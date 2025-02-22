@@ -6,3 +6,23 @@
   height: 743px;
   gap: 21px 17px;
 }
+
+@media screen and (max-width: 880px) and (min-width: 620px) {
+  .elements {
+    grid-template-rows: repeat(3, 361px);
+    grid-template-columns: repeat(2, 282px);
+    height: auto;
+    gap: 21px 17px;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 619px) and (min-width: 320px) {
+  .elements {
+    grid-template-rows: repeat(6, 361px);
+    grid-template-columns: 282px;
+    height: auto;
+    gap: 21px 17px;
+    justify-content: center;
+  }
+}
