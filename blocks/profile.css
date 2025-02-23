@@ -6,6 +6,7 @@
   align-items: center;
   padding: 40px 0 50px;
   column-gap: 30px;
+  box-sizing: border-box;
 }
 
 .profile__photo {
@@ -15,16 +16,17 @@
 }
 
 .profile__info {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 48px 22px;
+  grid-template-columns: 379px 24px;
+  grid-template-areas: "name button" "job job";
+  column-gap: 18px;
+  row-gap: 15px;
   align-items: baseline;
-  width: 415px;
-  flex-wrap: wrap;
-  height: fit-content;
-  row-gap: 16px;
 }
 
 .profile__name {
+  grid-area: name;
   font-family: "Inter", Arial, sans-serif;
   font-weight: 500;
   font-size: 42px;
@@ -32,9 +34,14 @@
   height: fit-content;
   color: #fff;
   margin: 0;
+  width: 373px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .profile__edit-button {
+  grid-area: button;
   width: 24px;
   height: 24px;
   background-image: url(../images/Edit\ Button.png);
@@ -44,25 +51,26 @@
   background-position: bottom;
   border-style: none;
   cursor: pointer;
+  padding: 0;
 }
 
 .profile__edit-button:hover {
   opacity: 60%;
 }
 
-.profile__description {
+.profile__job {
+  grid-area: job;
   font-family: "Inter", Arial, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  height: fit-content;
   color: #fff;
   margin: 0;
+  text-align: left;
 }
 
 .profile__add-button {
-  position: absolute;
-  right: 0;
+  margin-left: auto;
   width: 150px;
   height: 50px;
   line-height: 22px;
@@ -79,12 +87,14 @@
 
 @media screen and (max-width: 880px) and (min-width: 620px) {
   .profile {
-    justify-content: space-around;
     flex-wrap: wrap;
+    padding: 40px 20px 50px;
   }
 
   .profile__add-button {
     position: relative;
+    width: 282px;
+    margin: auto;
   }
 }
 
@@ -98,27 +108,29 @@
   }
 
   .profile__info {
-    width: 100%;
-    justify-content: center;
-    box-sizing: border-box;
-    row-gap: 14px;
+    grid-template-columns: auto auto;
+    grid-template-rows: 27px 17px;
+    grid-template-areas: "name button" "job job";
+    column-gap: 10px;
+    row-gap: 10px;
   }
   .profile__name {
     font-family: "Inter", Arial, sans-serif;
     font-weight: 500;
     font-size: 22px;
     line-height: 27px;
+    width: auto;
   }
   .profile__edit-button {
     width: 18px;
     height: 18px;
-    margin-left: 10px;
   }
-  .profile__description {
+  .profile__job {
     font-family: "Inter", Arial, sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
+    text-align: center;
   }
   .profile__add-button {
     position: relative;
