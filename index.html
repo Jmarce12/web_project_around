@@ -33,75 +33,8 @@
           </div>
           <button class="profile__add-button">+</button>
         </section>
-        <section class="elements">
-          <div class="element">
-            <img
-              src="./images/valle_de_yosemite.jpeg"
-              alt="Foto de Yosemite"
-              class="element__photo"
-            />
-            <div class="element__content">
-              <h2 class="element__title">Valle de Yosemite</h2>
-              <button class="element__like"></button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              src="./images/lago_louise.jpeg"
-              alt="Foto del Lago Louise"
-              class="element__photo element__photo_rotation"
-            />
-            <div class="element__content">
-              <h2 class="element__title">Lago Louise</h2>
-              <button class="element__like"></button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              src="./images/montanas_calvas.jpeg"
-              alt="Foto de las Montañas Calvas"
-              class="element__photo"
-            />
-            <div class="element__content">
-              <h2 class="element__title">Montañas Calvas</h2>
-              <button class="element__like"></button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              src="./images/latemar.jpeg"
-              alt="Foto de Latemar"
-              class="element__photo element__photo_rotation"
-            />
-            <div class="element__content">
-              <h2 class="element__title">Latemar</h2>
-              <button class="element__like"></button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              src="./images/vanois_national.jpeg"
-              alt="Foto del Parque Nacional de Vanois"
-              class="element__photo"
-            />
-            <div class="element__content">
-              <h2 class="element__title">Vanois National Park</h2>
-              <button class="element__like"></button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              src="./images/lago_di_braies.jpeg"
-              alt="Foto de Yosemite"
-              class="element__photo"
-            />
-            <div class="element__content">
-              <h2 class="element__title">Valle de Yosemite</h2>
-              <button class="element__like"></button>
-            </div>
-          </div>
-        </section>
-        <section class="popup">
+        <section class="elements"></section>
+        <section class="popup" id="edit-profile-form">
           <div class="popup__container">
             <button class="popup__close-button"></button>
             <h2 class="popup__title">Editar perfil</h2>
@@ -124,7 +57,46 @@
             </form>
           </div>
         </section>
+        <section class="popup" id="new-place-form">
+          <div class="popup__container">
+            <button class="popup__close-button"></button>
+            <h2 class="popup__title">Nuevo lugar</h2>
+            <form class="popup__form">
+              <input
+                type="text"
+                class="popup__input"
+                placeholder="Título"
+                id="titulo"
+                required
+              />
+              <input
+                type="text"
+                class="popup__input"
+                placeholder="Enlace a la imagen"
+                id="enlace"
+                required
+              />
+              <button class="popup__save-button">Crear</button>
+            </form>
+          </div>
+        </section>
+        <section class="popup" id="image-popup">
+          <div class="popup__image">
+            <img src="" alt="" class="popup__image-photo" />
+            <button class="popup__close-button"></button>
+          </div>
+        </section>
       </main>
+      <template id="element-template">
+        <div class="element">
+          <img src="" alt="" class="element__photo" />
+          <div class="element__content">
+            <h2 class="element__title"></h2>
+            <button class="element__like"></button>
+          </div>
+          <button class="element__delete"></button>
+        </div>
+      </template>
       <footer class="footer">
         <p class="footer__copyright">&#169; 2025 Around The U.S.</p>
       </footer>

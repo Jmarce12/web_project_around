@@ -98,6 +98,24 @@
   opacity: 0.8;
 }
 
+.popup__image {
+  width: auto;
+  height: 540px;
+  object-fit: cover;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+}
+
+.popup__image-photo {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
 @media screen and (max-width: 619px) and (min-width: 320px) {
   .popup__container {
     width: 282px;
