@@ -69,8 +69,10 @@ function handleImageClick(evt) {
   const imagePopup = document.querySelector("#image-popup");
   const image = document.querySelector(".popup__image-photo");
   const closeImage = imagePopup.querySelector(".popup__close-button");
+  const imageTitle = imagePopup.querySelector(".popup__image-title");
   image.src = evt.target.src;
   image.alt = evt.target.alt;
+  imageTitle.textContent = evt.target.alt;
   imagePopup.classList.add("popup__opened");
   closeImage.addEventListener("click", handleCloseButtonClick);
 }
@@ -115,6 +117,8 @@ function handleNewCardFormSubmit(evt) {
   };
   elements.prepend(showCards(newCard));
   newPlaceForm.classList.remove("popup__opened");
+  newPlaceForm.querySelector("#titulo").value = "";
+  newPlaceForm.querySelector("#enlace").value = "";
 }
 
 editButton.addEventListener("click", handleEditButtonClick);
