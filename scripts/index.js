@@ -144,17 +144,15 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add("popup__save-button_disabled");
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove("popup__save-button_disabled");
+    buttonElement.disabled = false;
   }
 };
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  console.log(formElement);
-  console.log(inputElement);
-  console.log(`.${inputElement.id}-error`);
-  console.log(errorElement);
   inputElement.classList.add("popup__input_type_error");
   errorElement.textContent = errorMessage;
   errorElement.classList.add("popup__input-error_active");

@@ -75,10 +75,6 @@
   border-bottom: 1px solid #5454545b;
 }
 
-/* .popup__input:first-of-type {
-  margin: 0 0 30px;
-} */
-
 .popup__input:focus {
   outline: none;
 }
