@@ -75,8 +75,33 @@
   border-bottom: 1px solid #5454545b;
 }
 
-.popup__input:first-of-type {
+/* .popup__input:first-of-type {
   margin: 0 0 30px;
+} */
+
+.popup__input:focus {
+  outline: none;
+}
+
+.popup__input_type_error {
+  border-bottom: 1px solid #f00;
+}
+
+.popup__input-error {
+  display: block;
+  width: 100%;
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: #f00;
+  margin: 0;
+  padding: 6px 0 9px;
+  opacity: 0;
+}
+
+.popup__input-error_active {
+  opacity: 1;
 }
 
 .popup__save-button {
@@ -96,6 +121,11 @@
 
 .popup__save-button:hover {
   opacity: 0.8;
+}
+
+.popup__save-button_disabled {
+  background-color: #0000004d;
+  cursor: not-allowed;
 }
 
 .popup__image {
