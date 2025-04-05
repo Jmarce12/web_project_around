@@ -43,6 +43,14 @@ const handleDeleteButtonClick = (evt) => {
   evt.target.closest(".element").remove();
 };
 
+const clickSuperimpose = () => {
+  window.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("popup__opened")) {
+      evt.target.classList.remove("popup__opened");
+    }
+  });
+};
+
 const handleImageClick = (evt) => {
   const imagePopup = document.querySelector("#image-popup");
   const image = document.querySelector(".popup__image-photo");
@@ -53,6 +61,7 @@ const handleImageClick = (evt) => {
   imageTitle.textContent = evt.target.alt;
   imagePopup.classList.add("popup__opened");
   closeImage.addEventListener("click", handleCloseButtonClick);
+  clickSuperimpose();
 };
 
 function showCards(card) {
@@ -84,6 +93,7 @@ const handleEditButtonClick = () => {
   editProfileForm.querySelector("#profesion").value = currentJob;
   closeEditForm.addEventListener("click", handleCloseButtonClick);
   saveButton.addEventListener("click", handleProfileFormSubmit);
+  clickSuperimpose();
 };
 
 const handleAddButtonClick = () => {
@@ -91,10 +101,11 @@ const handleAddButtonClick = () => {
   newPlaceForm.classList.add("popup__opened");
   closeAddForm.addEventListener("click", handleCloseButtonClick);
   createButton.addEventListener("click", handleNewCardFormSubmit);
+  clickSuperimpose();
 };
 
 const handleCloseButtonClick = (evt) => {
-  let popup = evt.target.closest(".popup");
+  const popup = evt.target.closest(".popup");
   popup.classList.remove("popup__opened");
 };
 
@@ -111,7 +122,7 @@ const handleProfileFormSubmit = (evt) => {
 
 const handleNewCardFormSubmit = (evt) => {
   evt.preventDefault();
-  let newCard = {
+  const newCard = {
     name: newPlaceForm.querySelector("#titulo").value,
     link: newPlaceForm.querySelector("#enlace").value,
   };
@@ -200,3 +211,5 @@ const enableValidation = (configList) => {
 };
 
 enableValidation(config);
+
+// <---------------End of validation of forms--------------->
