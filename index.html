@@ -44,16 +44,22 @@
                 class="popup__input"
                 placeholder="Nombre"
                 id="nombre"
+                minlength="2"
+                maxlength="40"
                 required
               />
+              <span class="popup__input-error" id="nombre-error"></span>
               <input
                 type="text"
                 class="popup__input"
                 placeholder="Acerca de mí"
                 id="profesion"
+                minlength="2"
+                maxlength="200"
                 required
               />
-              <button class="popup__save-button">Guardar</button>
+              <span class="popup__input-error" id="profesion-error"></span>
+              <button type="submit" class="popup__save-button">Guardar</button>
             </form>
           </div>
         </section>
@@ -67,16 +73,20 @@
                 class="popup__input"
                 placeholder="Título"
                 id="titulo"
+                minlength="2"
+                maxlength="30"
                 required
               />
+              <span class="popup__input-error" id="titulo-error"></span>
               <input
-                type="text"
+                type="url"
                 class="popup__input"
                 placeholder="Enlace a la imagen"
                 id="enlace"
                 required
               />
-              <button class="popup__save-button">Crear</button>
+              <span class="popup__input-error" id="enlace-error"></span>
+              <button type="submit" class="popup__save-button">Crear</button>
             </form>
           </div>
         </section>
