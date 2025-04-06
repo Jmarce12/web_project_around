@@ -35,20 +35,35 @@ const initialCards = [
   },
 ];
 
+const handleSuperimposeClick = (evt) => {
+  if (evt.target.classList.contains("popup__opened")) {
+    evt.target.classList.remove("popup__opened");
+  }
+};
+
+const clickSuperimpose = () => {
+  window.addEventListener("click", handleSuperimposeClick);
+};
+
+const handleEscKeyClick = (evt) => {
+  if (evt.key === "Escape") {
+    const popup = document.querySelector(".popup__opened");
+    if (popup) {
+      popup.classList.remove("popup__opened");
+    }
+  }
+};
+
+const handleEscClose = () => {
+  document.addEventListener("keydown", handleEscKeyClick, { once: true });
+};
+
 const handleLikeButtonClick = (evt) => {
   evt.target.classList.toggle("element__like__active");
 };
 
 const handleDeleteButtonClick = (evt) => {
   evt.target.closest(".element").remove();
-};
-
-const clickSuperimpose = () => {
-  window.addEventListener("click", (evt) => {
-    if (evt.target.classList.contains("popup__opened")) {
-      evt.target.classList.remove("popup__opened");
-    }
-  });
 };
 
 const handleImageClick = (evt) => {
@@ -62,6 +77,7 @@ const handleImageClick = (evt) => {
   imagePopup.classList.add("popup__opened");
   closeImage.addEventListener("click", handleCloseButtonClick);
   clickSuperimpose();
+  handleEscClose();
 };
 
 function showCards(card) {
@@ -94,6 +110,7 @@ const handleEditButtonClick = () => {
   closeEditForm.addEventListener("click", handleCloseButtonClick);
   saveButton.addEventListener("click", handleProfileFormSubmit);
   clickSuperimpose();
+  handleEscClose();
 };
 
 const handleAddButtonClick = () => {
@@ -102,6 +119,7 @@ const handleAddButtonClick = () => {
   closeAddForm.addEventListener("click", handleCloseButtonClick);
   createButton.addEventListener("click", handleNewCardFormSubmit);
   clickSuperimpose();
+  handleEscClose();
 };
 
 const handleCloseButtonClick = (evt) => {
@@ -198,18 +216,32 @@ const setEventListeners = (formElement) => {
   });
 };
 
+const eventPreventDefault = (evt) => {
+  evt.preventDefault();
+};
+
 const enableValidation = (configList) => {
   const formList = Array.from(
     document.querySelectorAll(configList.formSelector)
   );
   formList.forEach((formElement) => {
     setEventListeners(formElement);
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
+    formElement.addEventListener("submit", eventPreventDefault);
   });
 };
 
-enableValidation(config);
+const popupActive = () => {
+  const popupList = Array.from(document.querySelectorAll(".popup"));
+  popupList.forEach((popup) => {
+    if (popup.classList.contains("popup__opened")) {
+      hideInputError(popup, popup.querySelector(config.inputSelector));
+      enableValidation(config);
+    } else {
+      formElement.removeEventListener("submit", eventPreventDefault);
+    }
+  });
+};
+
+window.addEventListener("click", popupActive);
 
 // <---------------End of validation of forms--------------->
