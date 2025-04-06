@@ -236,8 +236,6 @@ const popupActive = () => {
     if (popup.classList.contains("popup__opened")) {
       hideInputError(popup, popup.querySelector(config.inputSelector));
       enableValidation(config);
-    } else {
-      formElement.removeEventListener("submit", eventPreventDefault);
     }
   });
 };
