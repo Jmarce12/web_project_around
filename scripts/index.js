@@ -59,6 +59,7 @@ const handleEscClose = () => {
   document.addEventListener("keydown", handleEscKeyClick, { once: true });
 };
 
+// Render initial cards
 initialCards.forEach((card) => {
   const newCard = new Card(card, ".element");
   const cardElement = newCard.generateCard();
