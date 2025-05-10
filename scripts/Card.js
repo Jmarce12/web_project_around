@@ -1,8 +1,9 @@
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._imagePopup = handleCardClick;
   }
 
   _getTemplate() {
@@ -28,7 +29,7 @@ export default class Card {
     this._element
       .querySelector(".element__photo")
       .addEventListener("click", () => {
-        this._handleImageClick();
+        this._handleCardClick();
       });
     this._element
       .querySelector(".element__like")
@@ -40,21 +41,18 @@ export default class Card {
       .addEventListener("click", () => {
         this._handleDeleteButtonClick();
       });
-    const imagePopup = document.querySelector("#image-popup");
-    imagePopup
-      .querySelector(".popup__close-button")
-      .addEventListener("click", () => {
-        this._handleCloseButtonClick();
-      });
   }
 
-  _handleImageClick = () => {
-    const imagePopup = document.querySelector("#image-popup");
-    imagePopup.classList.add("popup__opened");
-    const image = imagePopup.querySelector(".popup__image-photo");
-    image.src = this._link;
-    image.alt = this._name;
-    imagePopup.querySelector(".popup__image-title").textContent = this._name;
+  _handleCardClick = () => {
+    this._element
+      .querySelector(".element__photo")
+      .addEventListener("click", () => {
+        this._imagePopup.classList.add("popup__opened");
+        this._imagePopup.querySelector(".popup__image").src = this._link;
+        this._imagePopup.querySelector(".popup__image").alt = this._name;
+        this._imagePopup.querySelector(".popup__caption").textContent =
+          this._name;
+      });
   };
 
   _handleLikeButtonClick = () => {
@@ -65,14 +63,5 @@ export default class Card {
   _handleDeleteButtonClick = () => {
     this._deleteButton = this._element.querySelector(".element__delete");
     this._deleteButton.closest(".element").remove();
-  };
-
-  _handleCloseButtonClick = () => {
-    const imagePopup = document.querySelector("#image-popup");
-    imagePopup.classList.remove("popup__opened");
-    const closeImage = imagePopup.querySelector(".popup__close-button");
-    closeImage.removeEventListener("click", this._handleCloseButtonClick);
-    imagePopup.querySelector(".popup__image-photo").src = "";
-    imagePopup.querySelector(".popup__image-title").textContent = "";
   };
 }
