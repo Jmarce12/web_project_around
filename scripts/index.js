@@ -49,6 +49,9 @@ const config = {
   errorClass: "popup__input-error_active",
 };
 
+const popupWithImage = new PopupWithImage("#image-popup");
+popupWithImage.setEventListeners();
+
 const cardList = new Section(
   {
     data: initialCards,
@@ -67,9 +70,6 @@ const userInfo = new UserInfo({
   userNameSelector: profileName,
   userJobSelector: profileJob,
 });
-
-const popupWithImage = new PopupWithImage(".popup__image");
-popupWithImage.setEventListeners();
 
 const popupEditProfile = new PopupWithForm(
   "#edit-profile-form",
