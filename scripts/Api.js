@@ -11,6 +11,13 @@ export default class Api {
     }).then((res) => this._checkResponse(res));
   }
 
+  getInitialCards() {
+    return fetch(`${this.baseUrl}/cards`, {
+      method: "GET",
+      headers: this.headers,
+    }).then((res) => this._checkResponse(res));
+  }
+
   _checkResponse(res) {
     if (res.ok) {
       return res.json();

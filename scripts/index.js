@@ -14,33 +14,6 @@ const profileJobInput = document.querySelector("#profesion");
 const editProfileForm = document.querySelector("#edit-profile-form");
 const newPlaceForm = document.querySelector("#new-place-form");
 
-const initialCards = [
-  {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-  },
-  {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-  },
-  {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
-];
-
 const config = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -57,31 +30,6 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-
-api
-  .getUserData()
-  .then((res) => {
-    profileName.textContent = res.name;
-    profileJob.textContent = res.about;
-    profile.querySelector(".profile__photo").src = res.avatar;
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-const cardList = new Section(
-  {
-    data: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, ".element", (name, link) => {
-        popupWithImage.open(name, link);
-      });
-      const cardElement = card.generateCard();
-      cardList.setItem(cardElement);
-    },
-  },
-  ".elements"
-);
 
 const userInfo = new UserInfo({
   userNameSelector: profileName,
@@ -116,7 +64,34 @@ const popupNewPlace = new PopupWithForm(
   }
 );
 
-cardList.renderItems();
+api
+  .getUserData()
+  .then((res) => {
+    profileName.textContent = res.name;
+    profileJob.textContent = res.about;
+    profile.querySelector(".profile__photo").src = res.avatar;
+
+    return api.getInitialCards();
+  })
+  .then((cards) => {
+    const cardList = new Section(
+      {
+        data: cards,
+        renderer: (item) => {
+          const card = new Card(item, ".element", (name, link) => {
+            popupWithImage.open(name, link);
+          });
+          const cardElement = card.generateCard();
+          cardList.setItem(cardElement);
+        },
+      },
+      ".elements"
+    );
+    cardList.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const editProfileFormValidator = new FormValidator(config, editProfileForm);
 const newPlaceFormValidator = new FormValidator(config, newPlaceForm);
