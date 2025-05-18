@@ -11,6 +11,17 @@ export default class Api {
     }).then((res) => this._checkResponse(res));
   }
 
+  setUserData(data) {
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        name: data.nombre,
+        about: data.profesion,
+      }),
+    }).then((res) => this._checkResponse(res));
+  }
+
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
       method: "GET",

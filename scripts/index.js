@@ -42,10 +42,10 @@ popupWithImage.setEventListeners();
 const popupEditProfile = new PopupWithForm(
   "#edit-profile-form",
   ({ nombre, profesion }) => {
-    userInfo.setUserInfo({ nombre, profesion });
-
-    profileName.textContent = userInfo.getUserInfo().nombre;
-    profileJob.textContent = userInfo.getUserInfo().profesion;
+    api.setUserData({ nombre, profesion }).then((res) => {
+      profileName.textContent = res.name;
+      profileJob.textContent = res.about;
+    });
   }
 );
 
