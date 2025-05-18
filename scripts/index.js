@@ -1,3 +1,4 @@
+import Api from "./Api.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
@@ -48,6 +49,25 @@ const config = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_active",
 };
+
+const api = new Api({
+  baseUrl: "https://around-api.es.tripleten-services.com/v1/",
+  headers: {
+    authorization: "811785a2-de15-4b25-a503-1867df4610d5",
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getUserData()
+  .then((res) => {
+    profileName.textContent = res.name;
+    profileJob.textContent = res.about;
+    profile.querySelector(".profile__photo").src = res.avatar;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const cardList = new Section(
   {
