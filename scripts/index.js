@@ -43,8 +43,10 @@ const popupEditProfile = new PopupWithForm(
   "#edit-profile-form",
   ({ nombre, profesion }) => {
     api.setUserData({ nombre, profesion }).then((res) => {
-      profileName.textContent = res.name;
-      profileJob.textContent = res.about;
+      userInfo.setUserInfo({ nombre: res.name, profesion: res.about });
+
+      profileName.textContent = userInfo.getUserInfo().nombre;
+      profileJob.textContent = userInfo.getUserInfo().profesion;
     });
   }
 );
@@ -52,15 +54,13 @@ const popupEditProfile = new PopupWithForm(
 const popupNewPlace = new PopupWithForm(
   "#new-place-form",
   ({ titulo, enlace }) => {
-    const newCard = {
-      name: titulo,
-      link: enlace,
-    };
-    const card = new Card(newCard, ".element", (name, link) => {
-      popupWithImage.open(name, link);
+    api.addNewCard({ titulo, enlace }).then((res) => {
+      const card = new Card(res, ".element", (name, link) => {
+        popupWithImage.open(name, link);
+      });
+      const cardElement = card.generateCard();
+      document.querySelector(".elements").prepend(cardElement);
     });
-    const newCardElement = card.generateCard();
-    cardList.setItem(newCardElement);
   }
 );
 

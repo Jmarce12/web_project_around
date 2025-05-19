@@ -29,8 +29,20 @@ export default class Api {
     }).then((res) => this._checkResponse(res));
   }
 
+  addNewCard(data) {
+    return fetch(`${this.baseUrl}/cards`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify({
+        name: data.titulo,
+        link: data.enlace,
+      }),
+    }).then((res) => this._checkResponse(res));
+  }
+
   _checkResponse(res) {
     if (res.ok) {
+      console.log(res);
       return res.json();
     }
     return Promise.reject(`Error: ${res.status}`);
