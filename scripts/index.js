@@ -110,6 +110,17 @@ api
             (_id) => {
               popupDeleteCard.open();
               popupDeleteCard.setEventListeners(_id);
+            },
+            (cardId, isLiked) => {
+              api
+                .cardLike(cardId, isLiked)
+                .then((res) => {
+                  console.log(res);
+                  card.updateLikes();
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
             }
           );
           const cardElement = card.generateCard();
