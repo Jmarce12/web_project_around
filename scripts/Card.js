@@ -1,9 +1,16 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(
+    data,
+    templateSelector,
+    handleCardClick,
+    handleDeleteButtonClick
+  ) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteButtonClick = handleDeleteButtonClick;
   }
 
   _getTemplate() {
@@ -21,6 +28,7 @@ export default class Card {
     this._element.querySelector(".element__title").textContent = this._name;
     this._element.querySelector(".element__photo").src = this._link;
     this._element.querySelector(".element__photo").alt = this._name;
+    this._element.querySelector(".element__photo").id = `a${this._id}`;
 
     return this._element;
   }
@@ -39,7 +47,8 @@ export default class Card {
     this._element
       .querySelector(".element__delete")
       .addEventListener("click", () => {
-        this._handleDeleteButtonClick();
+        this._handleDeleteButtonClick(this._id);
+        this._resetDeleteListener();
       });
   }
 
@@ -48,8 +57,9 @@ export default class Card {
     this._likeButton.classList.toggle("element__like__active");
   };
 
-  _handleDeleteButtonClick = () => {
-    this._deleteButton = this._element.querySelector(".element__delete");
-    this._deleteButton.closest(".element").remove();
-  };
+  _resetDeleteListener() {
+    this._element
+      .querySelector(".element__delete")
+      .removeEventListener("click", this._handleDeleteButtonClick);
+  }
 }

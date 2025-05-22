@@ -17,13 +17,25 @@ export default class PopupWithForm extends Popup {
     return this._inputValues;
   }
 
+  _resetEventListeners() {
+    this._form.removeEventListener("submit", this._handleFormSubmit);
+    this._inputList.forEach((input) => {
+      input.value = "";
+    });
+  }
+
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
-      this.close();
-    });
+    this._form.addEventListener(
+      "submit",
+      (evt) => {
+        evt.preventDefault();
+        this._handleFormSubmit(this._getInputValues());
+        this.close();
+        this._resetEventListeners();
+      },
+      { once: true }
+    );
   }
 
   open() {

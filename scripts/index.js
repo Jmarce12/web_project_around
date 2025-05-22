@@ -4,6 +4,7 @@ import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import PopupWithConfirmation from "./PopupWithConfirmation.js";
 import UserInfo from "./Userinfo.js";
 
 const profile = document.querySelector(".profile");
@@ -55,12 +56,34 @@ const popupNewPlace = new PopupWithForm(
   "#new-place-form",
   ({ titulo, enlace }) => {
     api.addNewCard({ titulo, enlace }).then((res) => {
-      const card = new Card(res, ".element", (name, link) => {
-        popupWithImage.open(name, link);
-      });
+      const card = new Card(
+        res,
+        ".element",
+        (name, link) => {
+          popupWithImage.open(name, link);
+        },
+        (_id) => {
+          popupDeleteCard.open();
+          popupDeleteCard.setEventListeners(_id);
+        }
+      );
       const cardElement = card.generateCard();
       document.querySelector(".elements").prepend(cardElement);
     });
+  }
+);
+
+const popupDeleteCard = new PopupWithConfirmation(
+  "#confirm-delete",
+  (cardId) => {
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        document.querySelector(`#a${cardId}`).closest(".element").remove();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 );
 
@@ -78,9 +101,17 @@ api
       {
         data: cards,
         renderer: (item) => {
-          const card = new Card(item, ".element", (name, link) => {
-            popupWithImage.open(name, link);
-          });
+          const card = new Card(
+            item,
+            ".element",
+            (name, link) => {
+              popupWithImage.open(name, link);
+            },
+            (_id) => {
+              popupDeleteCard.open();
+              popupDeleteCard.setEventListeners(_id);
+            }
+          );
           const cardElement = card.generateCard();
           cardList.setItem(cardElement);
         },

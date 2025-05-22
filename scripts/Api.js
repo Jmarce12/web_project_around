@@ -5,14 +5,14 @@ export default class Api {
   }
 
   getUserData() {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return fetch(`${this.baseUrl}users/me`, {
       method: "GET",
       headers: this.headers,
     }).then((res) => this._checkResponse(res));
   }
 
   setUserData(data) {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return fetch(`${this.baseUrl}users/me`, {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({
@@ -23,20 +23,27 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch(`${this.baseUrl}/cards`, {
+    return fetch(`${this.baseUrl}cards`, {
       method: "GET",
       headers: this.headers,
     }).then((res) => this._checkResponse(res));
   }
 
   addNewCard(data) {
-    return fetch(`${this.baseUrl}/cards`, {
+    return fetch(`${this.baseUrl}cards`, {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify({
         name: data.titulo,
         link: data.enlace,
       }),
+    }).then((res) => this._checkResponse(res));
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this.baseUrl}cards/${cardId}`, {
+      method: "DELETE",
+      headers: this.headers,
     }).then((res) => this._checkResponse(res));
   }
 

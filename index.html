@@ -86,6 +86,19 @@
             </form>
           </div>
         </section>
+        <section class="popup" id="confirm-delete">
+          <form class="popup__form">
+            <div class="popup__container popup__container_delete-card">
+              <button class="popup__close-button"></button>
+              <h2 class="popup__title popup__title_delete-card">
+                ¿Estás seguro?
+              </h2>
+              <button class="popup__save-button popup__save-button_delete-card">
+                Sí
+              </button>
+            </div>
+          </form>
+        </section>
         <section class="popup" id="image-popup">
           <div class="popup__image">
             <img src="#" alt="" class="popup__image-photo" />
@@ -96,7 +109,7 @@
       </main>
       <template id="element-template">
         <div class="element">
-          <img src="" alt="" class="element__photo" />
+          <img src="" alt="" class="element__photo" id="" />
           <div class="element__content">
             <h2 class="element__title"></h2>
             <button class="element__like"></button>
