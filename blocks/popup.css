@@ -25,6 +25,10 @@
   padding: 34px 0 36px;
 }
 
+.popup__container_delete-card {
+  padding: 34px 36px 36px;
+}
+
 .popup__close-button {
   background-image: url(../images/Close\ Icon.png);
   background-color: transparent;
@@ -52,6 +56,10 @@
   margin: 0;
   padding: 0 36px 54px;
   text-align: left;
+}
+
+.popup__title_delete-card {
+  padding: 0 0 38px;
 }
 
 .popup__form {
@@ -113,6 +121,10 @@
   cursor: pointer;
   padding: 0;
   margin-top: 48px;
+}
+
+.popup__save-button_delete-card {
+  margin-top: 0;
 }
 
 .popup__save-button:hover {

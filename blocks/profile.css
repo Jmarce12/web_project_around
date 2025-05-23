@@ -13,6 +13,7 @@
   border-radius: 50%;
   width: 120px;
   height: 120px;
+  object-fit: cover;
 }
 
 .profile__info {
@@ -83,6 +84,25 @@
 
 .profile__add-button:hover {
   opacity: 60%;
+}
+
+.profile__overlay {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: url(../images/edit-avatar.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+  cursor: pointer;
+}
+
+.profile__overlay-active {
+  display: block;
 }
 
 @media screen and (max-width: 880px) and (min-width: 620px) {
