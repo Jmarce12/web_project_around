@@ -10,5 +10,6 @@ Crear validaciones de formularios
 Uso de clases para las diferentes funciones de la página
 Modulación de clases en sus respectivos archivos
 Uso del acoplamiento débil entre clases
+Implementación de una API en el proceso de recolección de información del usuario, así como de reescritura de avatar, user info, y creación de nuevas tarjetas.
 
 https://jmarce12.github.io/web_project_around/
