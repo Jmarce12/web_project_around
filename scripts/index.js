@@ -14,6 +14,9 @@ const profileNameInput = document.querySelector("#nombre");
 const profileJobInput = document.querySelector("#profesion");
 const editProfileForm = document.querySelector("#edit-profile-form");
 const newPlaceForm = document.querySelector("#new-place-form");
+const profileAvatar = document.querySelector(".profile__photo");
+const editProfileAvatar = document.querySelector(".profile__overlay");
+const editAvatarForm = document.querySelector("#edit-avatar");
 
 const config = {
   formSelector: ".popup__form",
@@ -39,6 +42,16 @@ const userInfo = new UserInfo({
 
 const popupWithImage = new PopupWithImage("#image-popup");
 popupWithImage.setEventListeners();
+
+const popupEditProfileAvatar = new PopupWithForm(
+  "#edit-avatar",
+  ({ avatar }) => {
+    console.log(avatar);
+    api.editAvatar({ avatar }).then((res) => {
+      userInfo.editAvatar({ avatar: res.avatar });
+    });
+  }
+);
 
 const popupEditProfile = new PopupWithForm(
   "#edit-profile-form",
@@ -92,7 +105,8 @@ api
   .then((res) => {
     profileName.textContent = res.name;
     profileJob.textContent = res.about;
-    profile.querySelector(".profile__photo").src = res.avatar;
+    profileAvatar.src = res.avatar;
+    profileAvatar.alt = res.name;
 
     return api.getInitialCards();
   })
@@ -136,11 +150,21 @@ api
   });
 
 const editProfileFormValidator = new FormValidator(config, editProfileForm);
+const profileAvatarFormValidator = new FormValidator(config, editAvatarForm);
 const newPlaceFormValidator = new FormValidator(config, newPlaceForm);
 editProfileFormValidator.enableValidation();
+profileAvatarFormValidator.enableValidation();
 newPlaceFormValidator.enableValidation();
 
-const handleEditButtonClick = () => {
+const handleEditAvatarButtonClick = () => {
+  editProfileAvatar.classList.remove("profile__overlay_active");
+  profileAvatarFormValidator.resetValidation();
+  editAvatarForm.querySelector(".popup__input").value = profileAvatar.src;
+  popupEditProfileAvatar.open();
+  popupEditProfileAvatar.setEventListeners();
+};
+
+const handleEditProfileButtonClick = () => {
   editProfileFormValidator.resetValidation();
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
@@ -154,10 +178,26 @@ const handleAddButtonClick = () => {
   popupNewPlace.setEventListeners();
 };
 
+const handleAvatarClick = () => {
+  editProfileAvatar.addEventListener("click", handleEditAvatarButtonClick);
+};
+
+const handleAvatarHover = () => {
+  editProfileAvatar.classList.add("profile__overlay-active");
+  editProfileAvatar.addEventListener("mouseleave", () => {
+    editProfileAvatar.classList.remove("profile__overlay-active");
+  });
+  handleAvatarClick();
+  editProfileAvatar.removeEventListener("mouseleave", () => {
+    editProfileAvatar.classList.remove("profile__overlay-active");
+  });
+};
+
 // Event Listeners for Edit and Add buttons
 document
   .querySelector(".profile__edit-button")
-  .addEventListener("click", handleEditButtonClick);
+  .addEventListener("click", handleEditProfileButtonClick);
 document
   .querySelector(".profile__add-button")
   .addEventListener("click", handleAddButtonClick);
+profileAvatar.addEventListener("mouseover", handleAvatarHover);

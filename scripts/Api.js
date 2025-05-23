@@ -22,6 +22,16 @@ export default class Api {
     }).then((res) => this._checkResponse(res));
   }
 
+  editAvatar(data) {
+    return fetch(`${this.baseUrl}users/me/avatar`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        avatar: data.avatar,
+      }),
+    }).then((res) => this._checkResponse(res));
+  }
+
   getInitialCards() {
     return fetch(`${this.baseUrl}cards`, {
       method: "GET",
