@@ -46,8 +46,7 @@ popupWithImage.setEventListeners();
 const popupEditProfileAvatar = new PopupWithForm(
   "#edit-avatar",
   ({ avatar }) => {
-    console.log(avatar);
-    api.editAvatar({ avatar }).then((res) => {
+    return api.editAvatar({ avatar }).then((res) => {
       userInfo.editAvatar({ avatar: res.avatar });
     });
   }
@@ -56,7 +55,7 @@ const popupEditProfileAvatar = new PopupWithForm(
 const popupEditProfile = new PopupWithForm(
   "#edit-profile-form",
   ({ nombre, profesion }) => {
-    api.setUserData({ nombre, profesion }).then((res) => {
+    return api.setUserData({ nombre, profesion }).then((res) => {
       userInfo.setUserInfo({ nombre: res.name, profesion: res.about });
 
       profileName.textContent = userInfo.getUserInfo().nombre;
@@ -68,7 +67,7 @@ const popupEditProfile = new PopupWithForm(
 const popupNewPlace = new PopupWithForm(
   "#new-place-form",
   ({ titulo, enlace }) => {
-    api.addNewCard({ titulo, enlace }).then((res) => {
+    return api.addNewCard({ titulo, enlace }).then((res) => {
       const card = new Card(
         res,
         ".element",
@@ -83,13 +82,14 @@ const popupNewPlace = new PopupWithForm(
       const cardElement = card.generateCard();
       document.querySelector(".elements").prepend(cardElement);
     });
-  }
+  },
+  "Crear"
 );
 
 const popupDeleteCard = new PopupWithConfirmation(
   "#confirm-delete",
   (cardId) => {
-    api
+    return api
       .deleteCard(cardId)
       .then(() => {
         document.querySelector(`#a${cardId}`).closest(".element").remove();
